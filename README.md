@@ -2,15 +2,29 @@
 Some fonts configuration...
 
 Leave these:
-
+```
 	/etc/fonts/conf.d/10-autohint.conf
 	/etc/fonts/conf.d/10-scale-bitmap-fonts.conf
-
-Remove these:
-
+```
+Remove the hinting:
+```
 	/etc/fonts/conf.d/10-hinting-*.conf
-
-Set freetype (e.g. in `~/.bash_profile`):
-
+```	
+Remove these, as they prevent terminus otb to be used and mess others:
+```	
+	/etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf
+	/etc/fonts/conf.d/48-guessfamily.conf
+	/etc/fonts/conf.d/49-sansserif.conf
+```
+You may wish to add this to `/etc/pkgadd.conf` (so files are not installed
+upon fontconfig update):
+```
+	INSTALL		^etc/fonts/conf\.d/10-hinting-slight\.conf		NO
+	INSTALL		^etc/fonts/conf\.d/70-no-bitmaps-except-emoji\.conf	NO
+	INSTALL		^etc/fonts/conf\.d/48-guessfamily\.conf			NO
+	INSTALL		^etc/fonts/conf\.d/49-sansserif\.conf			NO
+```
+Set freetype (e.g. in `.bash_profile`):
+```
 	export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
-  
+```
